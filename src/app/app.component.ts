@@ -23,4 +23,13 @@ export class AppComponent {
       content: blueprintData.serverContent
     });
   }
+
+  onChangeFirst() {
+    this.serverElements[0].name = 'Changed!';
+  }
+
+  // sample method to destroy an element so can see ngOnDestroy triggered
+  onDestroyFirst() {
+    this.serverElements.splice(0, 1);
+  }
 }
