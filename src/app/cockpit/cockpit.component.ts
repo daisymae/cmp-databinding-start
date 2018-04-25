@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-cockpit',
@@ -13,7 +13,11 @@ export class CockpitComponent implements OnInit {
   // add alias 'bpCreated'
   @Output('bpCreated') bluePrintCreated = new EventEmitter<{serverName: string, serverContent: string}>(); // a new EventEmitter property
   // newServerName = ''; -- no longer needed after passing in local reference from HTML
-  newServerContent = '';
+  // newServerContent = '';
+  // @ViewChild:
+  // could pass in a component in another component were used
+  // here using local reference
+  @ViewChild('serverContentInput') serverContentInput: ElementRef; // pass in the local reference
 
   constructor() { }
 
@@ -23,16 +27,19 @@ export class CockpitComponent implements OnInit {
   onAddServer(nameInput: HTMLInputElement) {
     /* receive the element with all its properties, so can use 'value' here to get the value from the input element */
     console.log(nameInput.value);
+    /* this is type ElementRef */
+    console.log(this.serverContentInput);
     this.serverCreated.emit({
       serverName: nameInput.value,
-      serverContent: this.newServerContent
+      serverContent: this.serverContentInput.nativeElement.value
     });
   }
 
   onAddBlueprint(nameInput: HTMLInputElement) {
+    console.log(this.serverContentInput);
     this.bluePrintCreated.emit({
       serverName: nameInput.value,
-      serverContent: this.newServerContent
+      serverContent: this.serverContentInput.nativeElement.value
     });
   }
 
