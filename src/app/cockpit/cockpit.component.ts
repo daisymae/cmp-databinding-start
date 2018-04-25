@@ -10,7 +10,8 @@ export class CockpitComponent implements OnInit {
   // EventEmitter allows us to emit own events
   // add @Output so OTHERS can listen for our event
   @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>(); // a new EventEmitter property
-  @Output() bluePrintCreated = new EventEmitter<{serverName: string, serverContent: string}>(); // a new EventEmitter property
+  // add alias 'bpCreated'
+  @Output('bpCreated') bluePrintCreated = new EventEmitter<{serverName: string, serverContent: string}>(); // a new EventEmitter property
   newServerName = '';
   newServerContent = '';
 
