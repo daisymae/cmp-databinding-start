@@ -9,7 +9,8 @@ export class ServerElementComponent implements OnInit {
   // this is only for THIS component; cannot access outside
   // UNTIL add @Input; now are exposing this property to the world
   // any parent/component using this is now able to bind to this custom property
-  @Input() element: {type: string, name: string, content: string}; // type definition for property want to use in HTML code
+  // 'srvElement' is an alias that must be used outside this element
+  @Input('srvElement') element: {type: string, name: string, content: string}; // type definition for property want to use in HTML code
 
   constructor() { }
 
