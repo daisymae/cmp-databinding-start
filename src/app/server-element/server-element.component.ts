@@ -10,7 +10,9 @@ import {
   AfterContentChecked,
   AfterViewInit,
   AfterViewChecked,
-  OnDestroy
+  OnDestroy,
+  ElementRef,
+  ViewChild
 } from '@angular/core';
 
 @Component({
@@ -37,6 +39,7 @@ export class ServerElementComponent implements
   // 'srvElement' is an alias that must be used outside this element
   @Input('srvElement') element: { type: string, name: string, content: string }; // type definition for property want to use in HTML code
   @Input() name: string;
+  @ViewChild('heading') header: ElementRef;
 
 
   constructor() {
@@ -51,6 +54,8 @@ export class ServerElementComponent implements
 
   ngOnInit() {
     console.log('ngOnInit called!');
+    // not available yet here
+    console.log('Text Content: ' + this.header.nativeElement.textContent);
   }
 
   /* called whenever Angular checks for any changes
@@ -73,6 +78,8 @@ export class ServerElementComponent implements
 
   ngAfterViewInit(): void {
     console.log('ngAfterViewInit called!');
+    // expected here
+    console.log('Text Content: ' + this.header.nativeElement.textContent);
   }
   ngAfterViewChecked(): void {
     console.log('ngAfterViewChecked called!');
