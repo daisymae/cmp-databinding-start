@@ -12,7 +12,8 @@ import {
   AfterViewChecked,
   OnDestroy,
   ElementRef,
-  ViewChild
+  ViewChild,
+  ContentChild
 } from '@angular/core';
 
 @Component({
@@ -40,6 +41,9 @@ export class ServerElementComponent implements
   @Input('srvElement') element: { type: string, name: string, content: string }; // type definition for property want to use in HTML code
   @Input() name: string;
   @ViewChild('heading') header: ElementRef;
+  /* ContentChild is similar to ViewChild except is for content that 
+  will be passed thru via <ng-content>. */
+  @ContentChild('contentParagraph') paragraph: ElementRef;
 
 
   constructor() {
@@ -56,6 +60,8 @@ export class ServerElementComponent implements
     console.log('ngOnInit called!');
     // not available yet here
     console.log('Text Content: ' + this.header.nativeElement.textContent);
+    console.log('Text Content of paragraph: ' + this.paragraph.nativeElement.textContent);
+
   }
 
   /* called whenever Angular checks for any changes
@@ -69,6 +75,8 @@ export class ServerElementComponent implements
   /* called only once; for this component, when the information from ng-content is injected */
   ngAfterContentInit(): void {
     console.log('ngAfterContentInit called!');
+    // expected here
+    console.log('Text Content of paragraph: ' + this.paragraph.nativeElement.textContent);
   }
 
   // called after each change detection cycle
